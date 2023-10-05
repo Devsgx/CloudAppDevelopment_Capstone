@@ -27,7 +27,6 @@ logger = logging.getLogger(__name__)
 
 # Create a `login_request` view to handle sign in request
 # def login_request(request):
-# ...
 def login_request(request):
     context = {}
     # Handles POST request
@@ -40,19 +39,44 @@ def login_request(request):
         if user is not None:
             # If user is valid, call login method to login current user
             login(request, user)
-            return redirect('onlinecourse:popular_course_list')
+            return redirect('djangoapp:popular_course_list')
         else:
             # If not, return to login page again
-            return render(request, 'onlinecourse/user_login.html', context)
+            return render(request, 'djangoapp/index.html', context)
     else:
-        return render(request, 'onlinecourse/user_login.html', context)
+        return render(request, 'djangoapp/index.html', context)
 # Create a `logout_request` view to handle sign out request
 # def logout_request(request):
 # ...
 
 # Create a `registration_request` view to handle sign up request
 # def registration_request(request):
-# ...
+def registration_request(request):
+    context = {}
+    # If it is a GET request, just render the registration page
+    if request.method == 'GET':
+        return render(request, 'djangoapp/registration.html', context)
+    # If it is a POST request
+    elif request.method == 'POST':
+        # <HINT> Get user information from request.POST
+        # <HINT> username, first_name, last_name, password
+        user_exist = False
+        try:
+            # Check if user already exists
+            User.objects.get(username=username)
+            user_exist = True
+        except:
+            # If not, simply log this is a new user
+            logger.debug("{} is new user".format(username))
+        # If it is a new user
+        if not user_exist:
+            # Create user in auth_user table
+            user = User.objects.create_user(#<HINT> create the user with above info)
+            # <HINT> Login the user and 
+            # redirect to course list page
+            return redirect('djangoapp:get_dealerships')
+        else:
+            return render(request, 'djangoapp/registration.html', context)
 
 # Update the `get_dealerships` view to render the index page with a list of dealerships
 def get_dealerships(request):
