@@ -43,7 +43,7 @@ def login_request(request):
         if user is not None:
             # If user is valid, call login method to login current user
             login(request, user)
-            return redirect('djangoapp:popular_course_list')
+            return redirect('djangoapp:index')
         else:
             # If not, return to login page again
             return render(request, 'djangoapp/index.html', context)
@@ -52,7 +52,13 @@ def login_request(request):
 
 # Create a `logout_request` view to handle sign out request
 # def logout_request(request):
-# ...
+def logout_request(request):
+    # Get the user object based on session id in request
+    print("Log out the user `{}`".format(request.user.username))
+    # Logout user in the request
+    logout(request)
+    # Redirect user back to index view
+    return redirect('djangoapp:index')
 
 # Create a `registration_request` view to handle sign up request
 # def registration_request(request):
