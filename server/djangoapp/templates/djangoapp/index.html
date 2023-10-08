@@ -25,13 +25,17 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                 <li>
-                    <a class="btn btn-link" href="{% url 'djangoapp:about' %}">Logout</a>
-                    <a class="btn btn-link" href="{% url 'djangoapp:contact' %}">Logout</a>
+                    <a class="btn btn-link" href="{% url 'djangoapp:about_us' %}">Logout</a>
+                    <a class="btn btn-link" href="{% url 'djangoapp:contact_us' %}">Logout</a>
                     <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
                     <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
                 </li>
                 {% else %}
                 <li>
+                    
+                    <a class="btn btn-link" href="{% url 'djangoapp:about_us' %}">About us</a>
+                    <a class="btn btn-link" href="{% url 'djangoapp:contact_us' %}">Contact us</a>
+                    
                     <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
                         {% csrf_token %}
                         <div class="input-group">
