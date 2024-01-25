@@ -30,7 +30,7 @@ class CarMake(models.Model)`:
 class CarModel(models.Model):
     name = models.CharField(null=False, max_length=20)
     description = models.CharField(max_length=500)
-    make=models.ManyToOneField(CarMake)
+    make=models.ForeignKey(CarMake, null=False)
     cartype=models.CharField(null=False,max_length=10)
     dealer=models.IntegerField()
     year=models.DateField()
