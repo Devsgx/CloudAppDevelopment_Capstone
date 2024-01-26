@@ -28,10 +28,16 @@ class CarMake(models.Model)`:
 # - __str__ method to print a car make object
 
 class CarModel(models.Model):
+    SEDAN='Sedan'
+    SUV='SUV'
+    WAGON='Wagon'
+    type=[(SEDAN='Sedan'),
+    (SUV='SUV'),
+    (WAGON='Wagon')]
     name = models.CharField(null=False, max_length=20)
     description = models.CharField(max_length=500)
     make=models.ForeignKey(CarMake, null=False)
-    cartype=models.CharField(null=False,max_length=10)
+    cartype=models.CharField(max_length=10, choices=type, default=SEDAN)
     dealer=models.IntegerField()
     year=models.DateField()
     
@@ -71,13 +77,13 @@ class CarDealer(models.Model):
 # <HINT> Create a plain Python class `DealerReview` to hold review data
 class DealerReview(models.Model):
     name = models.CharField(null=False, max_length=50)
-    dealership = models.IntField()
+    dealership = models.IntegerField()
     review = models.CharField(max_length=500)
     purchase = models.BooleanField()
     purchase_date = models.DateField()
     car_make = models.CharField()
     car_model = models.CharField()
-    car_year = models.IntField()
+    car_year = models.IntegerField()
             
     # Create a toString method for object string representation
     def __str__(self):
