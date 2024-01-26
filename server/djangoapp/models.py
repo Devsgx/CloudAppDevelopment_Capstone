@@ -10,7 +10,7 @@ from django.utils.timezone import now
 # - Any other fields you would like to include in car make model
 # - __str__ method to print a car make object
 
-class CarMake(models.Model)`:
+class CarMake(models.Model):
     name=models.CharField(null=False,max_length=20)
     description=models.CharField(null=False,max_length=500)
   
@@ -31,13 +31,15 @@ class CarModel(models.Model):
     SEDAN='Sedan'
     SUV='SUV'
     WAGON='Wagon'
-    type=[(SEDAN='Sedan'),
-    (SUV='SUV'),
-    (WAGON='Wagon')]
+
+    TYPE=[(SEDAN,'Sedan'),
+    (SUV,'SUV'),
+    (WAGON,'Wagon')]
+
     name = models.CharField(null=False, max_length=20)
     description = models.CharField(max_length=500)
-    make=models.ForeignKey(CarMake, null=False)
-    cartype=models.CharField(max_length=10, choices=type, default=SEDAN)
+    make=models.ForeignKey(CarMake, null=False, on_delete=models.CASCADE)
+    cartype=models.CharField(max_length=10, choices=TYPE, default=SEDAN)
     dealer=models.IntegerField()
     year=models.DateField()
     
@@ -46,7 +48,7 @@ class CarModel(models.Model):
         return "Name: " + self.name + "," + \
             "Description: " + self.description + "," + \
          "Type: " + self.cartype + "," + \
-            "Year :" + self.year + "," + \
+            "Year :" + self.year
 
         
 # <HINT> Create a plain Python class `CarDealer` to hold dealer data
@@ -72,7 +74,7 @@ class CarDealer(models.Model):
          "Lat: " + self.lat + "," + \
             "Long: " + self.long + "," + \
          "Short Name: " + self.short_name + "," + \
-         "Full Name: " + self.full_name + "," + \        
+         "Full Name: " + self.full_name        
         
 # <HINT> Create a plain Python class `DealerReview` to hold review data
 class DealerReview(models.Model):
@@ -81,8 +83,8 @@ class DealerReview(models.Model):
     review = models.CharField(max_length=500)
     purchase = models.BooleanField()
     purchase_date = models.DateField()
-    car_make = models.CharField()
-    car_model = models.CharField()
+    car_make = models.CharField(max_length=50)
+    car_model = models.CharField(max_length=50)
     car_year = models.IntegerField()
             
     # Create a toString method for object string representation
@@ -93,4 +95,4 @@ class DealerReview(models.Model):
             "Purchase Date: " + self.purchase_date + "," + \
          "Car Make: " + self.car_make + "," + \
          "Car Model: " + self.car_model + "," + \
-            "Car Year: " + self.car_year + "," + \
+            "Car Year: " + self.car_year
