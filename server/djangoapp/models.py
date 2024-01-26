@@ -41,7 +41,50 @@ class CarModel(models.Model):
             "Description: " + self.description + "," + \
          "Type: " + self.cartype + "," + \
             "Year :" + self.year + "," + \
+
+        
 # <HINT> Create a plain Python class `CarDealer` to hold dealer data
 
-
+class CarDealer(models.Model):
+    city = models.CharField(null=False, max_length=50)
+    state = models.CharField(max_length=20)
+    st = models.CharField(max_length=2)
+    address = models.CharField(max_length=100)
+    zip = models.CharField(max_length=10)
+    lat = models.FloatField()
+    long = models.FloatField()
+    short_name = models.CharField(null=False, max_length=50)
+    full_name = models.CharField(null=False, max_length=50)
+        
+    # Create a toString method for object string representation
+    def __str__(self):
+        return "City: " + self.city + "," + \
+            "State: " + self.state + "," + \
+         "St: " + self.st + "," + \
+            "Address: " + self.address + "," + \
+         "Zip: " + self.zip + "," + \
+         "Lat: " + self.lat + "," + \
+            "Long: " + self.long + "," + \
+         "Short Name: " + self.short_name + "," + \
+         "Full Name: " + self.full_name + "," + \        
+        
 # <HINT> Create a plain Python class `DealerReview` to hold review data
+class DealerReview(models.Model):
+    name = models.CharField(null=False, max_length=50)
+    dealership = models.IntField()
+    review = models.CharField(max_length=500)
+    purchase = models.BooleanField()
+    purchase_date = models.DateField()
+    car_make = models.CharField()
+    car_model = models.CharField()
+    car_year = models.IntField()
+            
+    # Create a toString method for object string representation
+    def __str__(self):
+        return "Name: " + self.name + "," + \
+            "Dealership: " + self.dealership + "," + \
+         "Review: " + self.review + "," + \
+            "Purchase Date: " + self.purchase_date + "," + \
+         "Car Make: " + self.car_make + "," + \
+         "Car Model: " + self.car_model + "," + \
+            "Car Year: " + self.car_year + "," + \
