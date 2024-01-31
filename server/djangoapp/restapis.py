@@ -8,6 +8,8 @@ from requests.auth import HTTPBasicAuth
 # e.g., response = requests.get(url, params=params, headers={'Content-Type': 'application/json'},
 #                                     auth=HTTPBasicAuth('apikey', api_key))
 def get_request(url, **kwargs):
+    response = None  # Initialize response variable
+    api_key = kwargs.get("api_key")
     print(kwargs)
     print("GET from {} ".format(url))
     try:
