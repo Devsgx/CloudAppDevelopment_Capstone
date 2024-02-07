@@ -111,6 +111,8 @@ class DealerReview(models.Model):
     car_make = models.CharField(max_length=50)
     car_model = models.CharField(max_length=50)
     car_year = models.IntegerField()
+    id = models.IntegerField()
+    sentiment = models.CharField()
             
     # Create a toString method for object string representation
     def __str__(self):
@@ -120,4 +122,30 @@ class DealerReview(models.Model):
             "Purchase Date: " + self.purchase_date + "," + \
          "Car Make: " + self.car_make + "," + \
          "Car Model: " + self.car_model + "," + \
-            "Car Year: " + self.car_year
+            "Car Year: " + self.car_year + "," + \
+         "ID : " + self.id + "," + \
+         "Sentiment : " + self.sentiment
+
+class DealerReview:
+
+    def __init__(self, address, city, full_name, id, lat, long, short_name, st, zip):
+        # Name
+        self.name = name
+        # Dealership
+        self.dealership = dealership
+        # Review
+        self.review = review
+        # Dealer id
+        self.id = id
+        # purchase
+        self.purchase = purchase
+        # Purchase date
+        self.purchase_date = purchase_date
+        # Make
+        self.car_make = car_make
+        # Model
+        self.car_model = car_model
+        # Year
+        self.car_year = car_year
+        # Sentiment
+        self.sentiment = sentiment
